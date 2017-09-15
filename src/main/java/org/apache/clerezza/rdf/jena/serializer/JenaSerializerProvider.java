@@ -25,9 +25,9 @@ import org.apache.clerezza.rdf.core.serializedform.SerializingProvider;
 import org.apache.clerezza.rdf.core.serializedform.SupportedFormat;
 import org.apache.clerezza.rdf.jena.facade.JenaGraph;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.RDFWriter;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFWriter;
 import java.util.concurrent.locks.Lock;
 import org.apache.clerezza.rdf.core.serializedform.UnsupportedSerializationFormatException;
 import org.apache.clerezza.commons.rdf.Graph;
@@ -59,7 +59,7 @@ public class JenaSerializerProvider implements SerializingProvider {
         Lock l = tc.getLock().readLock();
         l.lock();
         try {
-            com.hp.hpl.jena.graph.Graph graph = new JenaGraph(tc);
+            org.apache.jena.graph.Graph graph = new JenaGraph(tc);
             Model model = ModelFactory.createModelForGraph(graph);
             RDFWriter writer = model.getWriter(jenaFormat);
             if ("RDF/XML".equals(jenaFormat)) {

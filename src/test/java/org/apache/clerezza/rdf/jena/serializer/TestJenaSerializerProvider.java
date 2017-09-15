@@ -30,8 +30,8 @@ import org.apache.clerezza.commons.rdf.impl.utils.simple.SimpleGraph;
 import org.apache.clerezza.rdf.core.serializedform.SerializingProvider;
 import org.apache.clerezza.rdf.jena.facade.JenaGraph;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.clerezza.rdf.core.LiteralFactory;
 import org.apache.clerezza.commons.rdf.BlankNode;
 
@@ -52,11 +52,11 @@ public class TestJenaSerializerProvider {
 
     private void initializeGraph() {
         mGraph = new SimpleGraph();
-        com.hp.hpl.jena.graph.Graph graph = new JenaGraph(mGraph);
-        Model model = ModelFactory.createModelForGraph(graph);
+        //org.apache.jena.graph.Graph graph = new JenaGraph(mGraph);
+        //Model model = ModelFactory.createModelForGraph(graph);
         // create the resource
         // and add the properties cascading style
-        String URI = "http://example.org/";
+        /*String URI = "http://example.org/";
         model.createResource(URI + "A").addProperty(
                 model.createProperty(URI + "B"), "C").addProperty(
                 model.createProperty(URI + "D"),
@@ -71,7 +71,7 @@ public class TestJenaSerializerProvider {
                 LiteralFactory.getInstance().createTypedLiteral(54675)));
         mGraph.add(new TripleImpl(new BlankNode(),
                 new IRI("http://foo/bar"),
-                new IRI("http://foo/bar")));
+                new IRI("http://foo/bar")));*/
         mGraph.add(new TripleImpl(new BlankNode(),
                 new IRI("http://foo/bar"),
                 new PlainLiteralImpl("hello", new Language("en"))));
@@ -172,9 +172,9 @@ public class TestJenaSerializerProvider {
 
     private ImmutableGraph parse(InputStream serializedGraph, String jenaFormat) {
         Graph mResult = new SimpleGraph();
-        com.hp.hpl.jena.graph.Graph graph = new JenaGraph(mResult);
+        org.apache.jena.graph.Graph graph = new JenaGraph(mResult);
         Model model = ModelFactory.createModelForGraph(graph);
-        String base = "urn:x-relative:";
+        String base = "http://relative.local/";
         model.read(serializedGraph, base, jenaFormat);
         return mResult.getImmutableGraph();
     }
