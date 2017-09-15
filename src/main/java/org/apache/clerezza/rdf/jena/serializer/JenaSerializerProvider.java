@@ -91,6 +91,9 @@ public class JenaSerializerProvider implements SerializingProvider {
         if (formatIdentifier.equals(SupportedFormat.N_TRIPLE)) {
             return "N-TRIPLE";
         }
+        if (formatIdentifier.equals("application/ld+json")) {
+            return "JSONLD";
+        }
         throw new UnsupportedSerializationFormatException(formatIdentifier);
     }
 }
