@@ -25,12 +25,12 @@
         <groupId>org.wymiwyg</groupId>
         <artifactId>wymiwyg</artifactId>
         <version>0.9.8</version>
-        <relativePath></relativePath>
+        <relativePath />
     </parent>
     <groupId>org.wymiwyg.clerezza</groupId>
     <artifactId>rdf.jena.serializer</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.0</version>
     <name>Clerezza - RDF - Jena - Serializer</name>
     <description>A SerializingProvider based on jena</description>
     <build>
@@ -83,5 +83,6 @@
         <developerConnection>scm:git:git@github.com:clerezza/jena.serializer.git</developerConnection>
         <connection>scm:git:https://github.com/clerezza/jena.serializer.git</connection>
         <url>https://github.com/clerezza/jena.serializer</url>
-    </scm>
+      <tag>rdf.jena.serializer-2.0.0</tag>
+  </scm>
 </project>
