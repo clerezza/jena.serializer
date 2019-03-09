@@ -21,25 +21,23 @@ package org.apache.clerezza.rdf.jena.serializer;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import org.apache.clerezza.api.impl.graph.SimpleGraph;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.apache.clerezza.commons.rdf.ImmutableGraph;
-import org.apache.clerezza.commons.rdf.Graph;
-import org.apache.clerezza.commons.rdf.impl.utils.simple.SimpleGraph;
-import org.apache.clerezza.rdf.core.serializedform.SerializingProvider;
+import org.apache.clerezza.api.ImmutableGraph;
+import org.apache.clerezza.api.Graph;
 import org.apache.clerezza.rdf.jena.facade.JenaGraph;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.clerezza.rdf.core.LiteralFactory;
-import org.apache.clerezza.commons.rdf.BlankNode;
+import org.apache.clerezza.api.BlankNode;
 
-import org.apache.clerezza.commons.rdf.IRI;
-import org.apache.clerezza.commons.rdf.Language;
-import org.apache.clerezza.commons.rdf.impl.utils.PlainLiteralImpl;
-import org.apache.clerezza.commons.rdf.impl.utils.TripleImpl;
-import org.junit.Ignore;
+import org.apache.clerezza.api.IRI;
+import org.apache.clerezza.api.Language;
+import org.apache.clerezza.api.impl.TripleImpl;
+import org.apache.clerezza.api.impl.literal.PlainLiteralImpl;
+import org.apache.clerezza.representation.SerializingProvider;
 
 /**
  * Serializes a ImmutableGraph to different formats

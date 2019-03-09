@@ -21,16 +21,17 @@ package org.apache.clerezza.rdf.jena.serializer;
 
 import java.io.OutputStream;
 
-import org.apache.clerezza.rdf.core.serializedform.SerializingProvider;
-import org.apache.clerezza.rdf.core.serializedform.SupportedFormat;
+
 import org.apache.clerezza.rdf.jena.facade.JenaGraph;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFWriter;
 import java.util.concurrent.locks.Lock;
-import org.apache.clerezza.rdf.core.serializedform.UnsupportedSerializationFormatException;
-import org.apache.clerezza.commons.rdf.Graph;
+import org.apache.clerezza.api.Graph;
+import org.apache.clerezza.representation.SerializingProvider;
+import org.apache.clerezza.representation.SupportedFormat;
+import org.apache.clerezza.representation.UnsupportedSerializationFormatException;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Service;
