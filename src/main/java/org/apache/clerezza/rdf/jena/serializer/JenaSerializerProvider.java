@@ -46,10 +46,10 @@ import org.apache.felix.scr.annotations.Service;
 @Service(SerializingProvider.class)
 @Property(name="supportedFormat", value={SupportedFormat.RDF_XML,
     SupportedFormat.TURTLE,    SupportedFormat.X_TURTLE,
-    SupportedFormat.N_TRIPLE, SupportedFormat.N3})
+    SupportedFormat.N_TRIPLE, SupportedFormat.N3, "application/ld+json"})
 @SupportedFormat({SupportedFormat.RDF_XML,
     SupportedFormat.TURTLE,    SupportedFormat.X_TURTLE,
-    SupportedFormat.N_TRIPLE, SupportedFormat.N3})
+    SupportedFormat.N_TRIPLE, SupportedFormat.N3, "application/ld+json"})
 public class JenaSerializerProvider implements SerializingProvider {
 
     @Override
