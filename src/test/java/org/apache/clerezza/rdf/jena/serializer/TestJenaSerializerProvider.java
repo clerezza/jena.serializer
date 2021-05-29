@@ -1,20 +1,19 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor  license  agreements.  See the NOTICE file distributed
+ * with this work  for  additional  information  regarding  copyright
+ * ownership.  The ASF  licenses  this file to you under  the  Apache
+ * License, Version 2.0 (the "License"); you may not  use  this  file
+ * except in compliance with the License.  You may obtain  a copy  of
+ * the License at
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * Unless  required  by  applicable law  or  agreed  to  in  writing,
+ * software  distributed  under  the  License  is  distributed  on an
+ * "AS IS"  BASIS,  WITHOUT  WARRANTIES  OR  CONDITIONS  OF ANY KIND,
+ * either  express  or implied.  See  the License  for  the  specific
+ * language governing permissions and limitations under  the License.
  */
 package org.apache.clerezza.rdf.jena.serializer;
 
@@ -22,30 +21,26 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.apache.clerezza.commons.rdf.ImmutableGraph;
-import org.apache.clerezza.commons.rdf.Graph;
-import org.apache.clerezza.commons.rdf.impl.utils.simple.SimpleGraph;
-import org.apache.clerezza.rdf.core.serializedform.SerializingProvider;
+import org.apache.clerezza.*;
+import org.apache.clerezza.implementation.TripleImpl;
+import org.apache.clerezza.implementation.in_memory.SimpleGraph;
+import org.apache.clerezza.implementation.literal.PlainLiteralImpl;
 import org.apache.clerezza.rdf.jena.facade.JenaGraph;
 
+import org.apache.clerezza.representation.SerializingProvider;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.clerezza.rdf.core.LiteralFactory;
-import org.apache.clerezza.commons.rdf.BlankNode;
-
-import org.apache.clerezza.commons.rdf.IRI;
-import org.apache.clerezza.commons.rdf.Language;
-import org.apache.clerezza.commons.rdf.impl.utils.PlainLiteralImpl;
-import org.apache.clerezza.commons.rdf.impl.utils.TripleImpl;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 /**
- * Serializes a ImmutableGraph to different formats
- * 
+ * Serializes an ImmutableGraph to different formats
+ *
  * @author mir
  */
+@RunWith(JUnitPlatform.class)
 public class TestJenaSerializerProvider {
 
     private Graph mGraph;
@@ -94,13 +89,13 @@ public class TestJenaSerializerProvider {
         // due to http://issues.trialox.org/jira/browse/RDF-6 we cannot just
         // check
         // that the two graphs are equals
-        Assert.assertEquals(deserializedGraph.size(), mGraph.getImmutableGraph().size());
-        Assert.assertEquals(deserializedGraph.hashCode(), mGraph.getImmutableGraph()
+        Assertions.assertEquals(deserializedGraph.size(), mGraph.getImmutableGraph().size());
+        Assertions.assertEquals(deserializedGraph.hashCode(), mGraph.getImmutableGraph()
                 .hashCode());
         // isomorphism delegated to jena
         JenaGraph jenaGraphFromNTriples = new JenaGraph(deserializedGraph);
         JenaGraph jenaGraphFromTurtle = new JenaGraph(mGraph.getImmutableGraph());
-        Assert.assertTrue(jenaGraphFromNTriples
+        Assertions.assertTrue(jenaGraphFromNTriples
                 .isIsomorphicWith(jenaGraphFromTurtle));
     }
 
@@ -115,7 +110,7 @@ public class TestJenaSerializerProvider {
         InputStream in = new ByteArrayInputStream(serializedGraph.toByteArray());
 
         ImmutableGraph deserializedGraph = parse(in, "TURTLE");
-        Assert.assertEquals(mGraph.getImmutableGraph(), deserializedGraph);
+        Assertions.assertEquals(mGraph.getImmutableGraph(), deserializedGraph);
 
     }
 
@@ -135,7 +130,7 @@ public class TestJenaSerializerProvider {
         InputStream in = new ByteArrayInputStream(serializedGraph.toByteArray());
 
         ImmutableGraph deserializedGraph = parse(in, "RDF/XML-ABBREV");
-        Assert.assertEquals(mGraph.getImmutableGraph(), deserializedGraph);
+        Assertions.assertEquals(mGraph.getImmutableGraph(), deserializedGraph);
     }
 
     /*
@@ -151,7 +146,7 @@ public class TestJenaSerializerProvider {
         InputStream in = new ByteArrayInputStream(serializedGraph.toByteArray());
 
         ImmutableGraph deserializedGraph = parse(in, "N-TRIPLE");
-        Assert.assertEquals(mGraph.getImmutableGraph(), deserializedGraph);
+        Assertions.assertEquals(mGraph.getImmutableGraph(), deserializedGraph);
     }
 
     /*
@@ -167,7 +162,7 @@ public class TestJenaSerializerProvider {
         InputStream in = new ByteArrayInputStream(serializedGraph.toByteArray());
 
         ImmutableGraph deserializedGraph = parse(in, "N3");
-        Assert.assertEquals(mGraph.getImmutableGraph(), deserializedGraph);
+        Assertions.assertEquals(mGraph.getImmutableGraph(), deserializedGraph);
     }
 
     private ImmutableGraph parse(InputStream serializedGraph, String jenaFormat) {

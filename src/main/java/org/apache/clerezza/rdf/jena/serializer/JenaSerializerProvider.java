@@ -1,58 +1,68 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor  license  agreements.  See the NOTICE file distributed
+ * with this work  for  additional  information  regarding  copyright
+ * ownership.  The ASF  licenses  this file to you under  the  Apache
+ * License, Version 2.0 (the "License"); you may not  use  this  file
+ * except in compliance with the License.  You may obtain  a copy  of
+ * the License at
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * Unless  required  by  applicable law  or  agreed  to  in  writing,
+ * software  distributed  under  the  License  is  distributed  on an
+ * "AS IS"  BASIS,  WITHOUT  WARRANTIES  OR  CONDITIONS  OF ANY KIND,
+ * either  express  or implied.  See  the License  for  the  specific
+ * language governing permissions and limitations under  the License.
  */
 package org.apache.clerezza.rdf.jena.serializer;
 
-
-import java.io.OutputStream;
-
-import org.apache.clerezza.rdf.core.serializedform.SerializingProvider;
-import org.apache.clerezza.rdf.core.serializedform.SupportedFormat;
+import org.apache.clerezza.Graph;
 import org.apache.clerezza.rdf.jena.facade.JenaGraph;
-
+import org.apache.clerezza.representation.SerializingProvider;
+import org.apache.clerezza.representation.SupportedFormat;
+import org.apache.clerezza.representation.UnsupportedSerializationFormatException;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFWriter;
+import org.osgi.service.component.annotations.Component;
+
+import java.io.OutputStream;
 import java.util.concurrent.locks.Lock;
-import org.apache.clerezza.rdf.core.serializedform.UnsupportedSerializationFormatException;
-import org.apache.clerezza.commons.rdf.Graph;
-import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Property;
-import org.apache.felix.scr.annotations.Service;
+
 /**
- * A {@link org.apache.clerezza.rdf.core.serializedform.SerializingProvider} based on Jena
+ * A {@link org.apache.clerezza.representation.SerializingProvider} based on Jena
  *
  * @author mir
  */
 /*
  * see http://jena.sourceforge.net/IO/iohowto.html
  */
-@Component
-@Service(SerializingProvider.class)
-@Property(name="supportedFormat", value={SupportedFormat.RDF_XML,
-    SupportedFormat.TURTLE,    SupportedFormat.X_TURTLE,
-    SupportedFormat.N_TRIPLE, SupportedFormat.N3, "application/ld+json"})
-@SupportedFormat({SupportedFormat.RDF_XML,
-    SupportedFormat.TURTLE,    SupportedFormat.X_TURTLE,
-    SupportedFormat.N_TRIPLE, SupportedFormat.N3, "application/ld+json"})
+@Component(
+    name = "Jena Serializer Provider",
+    service = SerializingProvider.class,
+    property = {
+        "supportedFormat={" +
+            "SupportedFormat.RDF_XML," +
+            "SupportedFormat.TURTLE," +
+            "SupportedFormat.X_TURTLE," +
+            "SupportedFormat.N_TRIPLE," +
+            "SupportedFormat.N3," +
+            "\"application/ld+json\"" +
+        "}"
+    },
+    immediate=true
+)
+@SupportedFormat({
+    SupportedFormat.RDF_XML,
+    SupportedFormat.TURTLE,
+    SupportedFormat.X_TURTLE,
+    SupportedFormat.N_TRIPLE,
+    SupportedFormat.N3,
+    "application/ld+json"
+})
 public class JenaSerializerProvider implements SerializingProvider {
 
-    @Override
     public void serialize(OutputStream serializedGraph, Graph tc,
             String formatIdentifier) {
         String jenaFormat = getJenaFormat(formatIdentifier);
