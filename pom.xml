@@ -95,6 +95,6 @@
         <developerConnection>scm:git:git@github.com:clerezza/jena.serializer.git</developerConnection>
         <connection>scm:git:https://github.com/clerezza/jena.serializer.git</connection>
         <url>https://github.com/clerezza/jena.serializer</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 </project>
